@@ -7,6 +7,7 @@ import cors from "cors";
 dotenv.config();
 
 import userRoutes from "./routes/userRoutes.js";
+import quizRoutes from "./routes/quizRoutes.js";
 
 connectDb();
 
@@ -15,6 +16,7 @@ app.use(morgan("dev"));
 app.use(cors());
 
 app.use("/api/users", userRoutes);
+app.use("/api/quizs", quizRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
