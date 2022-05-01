@@ -50,4 +50,37 @@ const getQuizWeekly = asyncHandler(async (req, res) => {
   }
 });
 
-export { postQuiz, getQuizDaily, getQuizWeekly };
+const getQuizSpecficData = asyncHandler(async (req, res) => {
+  try {
+    console.log(new Date());
+    const quiz = await Quiz.find({
+      user_id: req.params.id,
+      createdAt: {
+        $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+      },
+    });
+
+    // const quiz = await Quiz.aggregate([
+    //   { $match: { user_id: req.params.id } },
+    //   {
+    //     $project: {
+    //       year: { $year: "$createdAt" },
+    //       month: { $month: "$createdAt" },
+    //       day: { $dayOfMonth: "$createdAt" },
+    //     },
+    //   },
+    // ]);
+    // const quiz = await Quiz.find({
+    //   user_id: req.params.id,
+    //   createdAt: {
+    //     $gte: new Date(2022, 4, 27),
+    //     $lt: new Date(2022, 5, 1),
+    //   },
+    // });
+    res.status(200).json(quiz);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+export { postQuiz, getQuizDaily, getQuizWeekly, getQuizSpecficData };

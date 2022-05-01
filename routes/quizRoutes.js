@@ -3,6 +3,7 @@ import {
   postQuiz,
   getQuizDaily,
   getQuizWeekly,
+  getQuizSpecficData,
 } from "../controllers/quizController.js";
 const router = express.Router();
 
@@ -11,5 +12,6 @@ const router = express.Router();
 router.post("/postQuiz", postQuiz);
 router.get("/getDaily/:id", getQuizDaily);
 router.get("/getWeekly/:id", getQuizWeekly);
+router.get("/getSpecficDate/:id", getQuizSpecficData);
 
 export default router;
